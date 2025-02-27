@@ -1,0 +1,68 @@
+CREATE TABLE ALUNO1
+(
+    RA CHAR(9) PRIMARY KEY,
+    NOME CHAR(50)
+);
+
+INSERT INTO ALUNO1 VALUES ('111222333', 'Antonia Alves');
+INSERT INTO ALUNO1 VALUES ('222333444', 'Beatriz Bernardes');
+INSERT INTO ALUNO1 VALUES ('333444555', 'Cláudia Cardoso');
+
+--
+DECLARE
+    V_RA CHAR(9) := '333444555';
+    V_NOME VARCHAR2(50);
+BEGIN 
+    SELECT NOME INTO V_NOME FROM ALUNO1 WHERE RA = V_RA;
+    dbms_output.put_line('O NOME DO ALUNO É:' || V_NOME);
+END;
+  
+--  
+DECLARE 
+	V_RA CHAR(9) := '444555666'; 
+	V_NOME VARCHAR2(50) := 'Daniela Dorneles'; 
+BEGIN 
+	INSERT INTO ALUNO1 (RA,NOME) VALUES (V_RA,V_NOME); 
+END;
+
+--
+DECLARE 
+	V_RA CHAR(9) := '111222333'; 
+	V_NOME VARCHAR2(50) := 'Antonio Rodrigues'; 
+BEGIN 
+	UPDATE ALUNO1 SET NOME = V_NOME WHERE RA = V_RA; 
+END;
+
+DECLARE 
+	V_RA CHAR(9) := '444555666'; 
+BEGIN 
+    DELETE FROM ALUNO1 WHERE RA = V_RA; 
+END;
+
+--
+SELECT * FROM VENDAS;
+
+-- CRIE UM BLOCO ANÔNIMO PARA CONTAR A QUANTIDADE DE PEDIDOS POR UM DETERMINADO PAIS;
+SET SERVEROUTPUT ON;
+
+DECLARE
+    V_PAIS VARCHAR2(30) := '&VALOR';
+    TOTAL NUMBER;
+BEGIN
+    SELECT 
+        COUNT(1), 
+        COUNTRY 
+    INTO 
+        TOTAL, 
+        V_PAIS 
+    FROM 
+        vendas
+    WHERE 
+        COUNTRY = V_PAIS
+    GROUP BY 
+        COUNTRY;
+    dbms_output.put_line('A QUANTIDADE DE PEDIDOS PARA O PAIS INFORMADO QUE É: ' 
+                            || ' SÃO '
+                            || TOTAL 
+                            || 'PEDIDOS');
+END;

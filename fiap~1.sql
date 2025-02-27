@@ -1,0 +1,37 @@
+-- 1- ESCREVA UM BLOCO ANÔNIMO PARA QUE O USUÁRIO PASSE UM NÚMERO QUALQUER E RETORNE SE O VALOR É IMPAR OU PAR.
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    NUMERO NUMBER := '&VALOR';
+BEGIN
+    IF MOD(NUMERO,2) = 0 THEN 
+        dbms_output.put_line('O NÚMERO INFORMADO É PAR');
+    ELSE
+        dbms_output.put_line('O NÚMERO INFORMADO É ÍMPAR');
+    END IF;
+END;
+
+-- 2- ESCREVA UM BLOCO ANÔNIMO PARA CALCULAR SE O ALUNO ESTA ACIMA DA MÉDIA, NA MÉDIA OU REPROVADO.
+-- * MAIOR QUE 8 E MENOR 1O = ACIMA DA MÉDIA
+-- * MAIOR QUE 6 E MENOR QUE 8 = MÉDIA
+-- * MENOR QUE 6 = REPROVADO
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    NOTA NUMBER := '&VALOR';
+BEGIN
+    IF 
+        NOTA >= 8 
+        AND NOTA <= 10 
+    THEN
+        dbms_output.put_line('SUA NOTA ESTÁ ACIMA DA MÉDIA');
+    ELSIF NOTA BETWEEN 6 AND 7.9 THEN
+        dbms_output.put_line('SUA NOTA ESTÁ NA MÉDIA');
+    ELSIF NOTA <6 THEN
+        dbms_output.put_line('VOCÊ ESTÁ REPROVADO');
+        ELSE
+            dbms_output.put_line('NÃO COMPATÍVEL');
+        END IF;
+END;
